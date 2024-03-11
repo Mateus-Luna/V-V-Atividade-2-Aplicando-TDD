@@ -44,4 +44,8 @@ public class TarefaService {
         return tarefaRepository.contaTarefas();
     }
 
+    public String listarTarefas() {
+        return tarefaRepository.listarTarefas();
+    }
+
 }

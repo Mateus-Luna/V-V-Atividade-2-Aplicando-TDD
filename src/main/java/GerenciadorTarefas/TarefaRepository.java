@@ -1,6 +1,9 @@
 package GerenciadorTarefas;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TarefaRepository {
@@ -78,6 +81,31 @@ public class TarefaRepository {
 
     public int contaTarefas() {
         return repository.size();
+    }
+
+    public String listarTarefas() {
+        String result = "Tarefas:" + "\n" + "---" + "\n";
+        List<Tarefa> tarefas = tarefasOrdenadas();
+        int cont = 0;
+        for (Tarefa tarefa: tarefas) {
+            result +=
+            "Nome: " + tarefa.getNome() + "\n" +
+            "Descrição: " + tarefa.getDescricao() + "\n" +
+            "Data: " + tarefa.getData() + "\n" +
+            "Prioridade: " + tarefa.getPrioridade() + "\n" +
+            "---";
+            cont++;
+            if (cont < tarefas.size()) {
+                result += "\n";
+            } 
+        }
+        return result;
+    }
+
+    private List<Tarefa> tarefasOrdenadas() {
+        List<Tarefa> tarefas = new ArrayList<>(repository.values());
+        Collections.sort(tarefas, new TarefaComparator());
+        return tarefas;
     }
 
 }

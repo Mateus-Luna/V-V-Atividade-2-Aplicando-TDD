@@ -45,4 +45,8 @@ public class TarefaController {
         return tarefaService.contaTarefas();
     }
 
+    public String listarTarefas() {
+        return tarefaService.listarTarefas();
+    }
+
 }
