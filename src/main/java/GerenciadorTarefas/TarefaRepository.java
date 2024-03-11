@@ -34,4 +34,49 @@ public class TarefaRepository {
     public void esvazia() {
     }
 
+    public void atualizarNomeTarefa(String nome, String nomeAlterado) {
+        if (containsTarefa(nome)) {
+            Tarefa tarefa = repository.get(nome);
+            String descr = tarefa.getDescricao();
+            String data = tarefa.getData();
+            String prioridade = tarefa.getPrioridade();
+            repository.remove(nome);
+            tarefa = new Tarefa(nomeAlterado, descr, data, prioridade);
+            repository.put(nomeAlterado, tarefa);
+        }
+    }
+
+    public void atualizarDescrTarefa(String nome, String descrAlterado) {
+        if (containsTarefa(nome)) {
+            Tarefa tarefa = repository.get(nome);
+            String data = tarefa.getData();
+            String prioridade = tarefa.getPrioridade();
+            repository.remove(nome);
+            tarefa = new Tarefa(nome, descrAlterado, data, prioridade);
+            repository.put(nome, tarefa);
+        }
+    }
+
+    public void atualizarDataTarefa(String nome, String dataAlterado) {
+        if (containsTarefa(nome)) {
+            Tarefa tarefa = repository.get(nome);
+            String descr = tarefa.getDescricao();
+            String prioridade = tarefa.getPrioridade();
+            repository.remove(nome);
+            tarefa = new Tarefa(nome, descr, dataAlterado, prioridade);
+            repository.put(nome, tarefa);
+        }
+    }
+
+    public void atualizarPrioridadeTrefa(String nome, String prioridadeAlterada) {
+        if (containsTarefa(nome)) {
+            Tarefa tarefa = repository.get(nome);
+            String descr = tarefa.getDescricao();
+            String data = tarefa.getData();
+            repository.remove(nome);
+            tarefa = new Tarefa(nome, descr, data, prioridadeAlterada);
+            repository.put(nome, tarefa);
+        }
+    }
+
 }

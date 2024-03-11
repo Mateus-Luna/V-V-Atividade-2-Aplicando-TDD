@@ -20,4 +20,20 @@ public class TarefaService {
         tarefaRepository.clearRepository();
     }
 
+    public void atualizarNomeTarefa(String nome, String nomeAlterado) {
+        tarefaRepository.atualizarNomeTarefa(nome, nomeAlterado);
+    }
+
+    public void atualizarDescrTarefa(String nome, String descrAlterado) {
+        tarefaRepository.atualizarDescrTarefa(nome, descrAlterado);
+    }
+
+    public void atualizarDataTarefa(String nome, String dataAlterado) {
+        tarefaRepository.atualizarDataTarefa(nome, dataAlterado);
+    }
+
+    public void atualizarPrioridadeTarefa(String nome, String prioridadeAlterada) {
+        tarefaRepository.atualizarPrioridadeTrefa(nome, prioridadeAlterada);
+    }
+
 }
