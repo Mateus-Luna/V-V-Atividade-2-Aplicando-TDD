@@ -31,9 +31,6 @@ public class TarefaRepository {
         repository.clear();
     }
 
-    public void esvazia() {
-    }
-
     public void atualizarNomeTarefa(String nome, String nomeAlterado) {
         if (containsTarefa(nome)) {
             Tarefa tarefa = repository.get(nome);
@@ -77,6 +74,10 @@ public class TarefaRepository {
             tarefa = new Tarefa(nome, descr, data, prioridadeAlterada);
             repository.put(nome, tarefa);
         }
+    }
+
+    public int contaTarefas() {
+        return repository.size();
     }
 
 }

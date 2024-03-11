@@ -36,4 +36,12 @@ public class TarefaService {
         tarefaRepository.atualizarPrioridadeTrefa(nome, prioridadeAlterada);
     }
 
+    public void excluirTarefa(String nome) {
+        tarefaRepository.removeTarefa(nome);
+    }
+
+    public int contaTarefas() {
+        return tarefaRepository.contaTarefas();
+    }
+
 }
