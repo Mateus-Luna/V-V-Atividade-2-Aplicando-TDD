@@ -1,7 +1,5 @@
 package GerenciadTarefasFunctionalTests;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import GerenciadorTarefas.TarefaController;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
