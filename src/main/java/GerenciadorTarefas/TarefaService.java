@@ -8,7 +8,11 @@ public class TarefaService {
         tarefaRepository = new TarefaRepository();
     }
 
-    public void criaTarefa(Tarefa tarefa) {
+    public void criaTarefa(String nome, String descricao, String data, String prioridade) {
+        if (nome == null || nome.isEmpty()) {
+            throw new IllegalArgumentException("O nome da tarefa não pode ser nulo ou vazio.");
+        }
+        Tarefa tarefa = new Tarefa(nome, descricao, data, prioridade);
         tarefaRepository.addTarefa(tarefa.getNome(), tarefa);
     }
 

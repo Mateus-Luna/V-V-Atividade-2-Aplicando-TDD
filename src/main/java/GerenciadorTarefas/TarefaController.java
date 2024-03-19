@@ -9,8 +9,7 @@ public class TarefaController {
     }
 
     public void criarTarefa(String nome, String descricao, String data, String prioridade) {
-        Tarefa tarefa = new Tarefa(nome, descricao, data, prioridade);
-        tarefaService.criaTarefa(tarefa);
+        tarefaService.criaTarefa(nome, descricao, data, prioridade);
     }
 
     public Tarefa getTarefa(String nome) {
