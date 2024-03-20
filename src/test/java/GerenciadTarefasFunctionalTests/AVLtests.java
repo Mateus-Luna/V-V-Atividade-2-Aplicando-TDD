@@ -1,6 +1,14 @@
 package GerenciadTarefasFunctionalTests;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import GerenciadorTarefas.Tarefa;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Test;
+
+
 
 public class AVLtests extends FunctionalTests {
 
@@ -8,13 +16,19 @@ public class AVLtests extends FunctionalTests {
     void nomeVazioTest() {
         /* AAA pattern */
         // Arrenge:
-        nome = null;
+        nome = "";
         descr = "Escrever testes funcionais.";
         data = "20/03/2024";
         prioridade = "alta";
         // Act:
-        driver.criarTarefa(nome, descr, data, prioridade);
+        try {
+            driver.criarTarefa(nome, descr, data, prioridade);
+            fail("A exceção esperada não foi lançada");
+        }
         // Assert:
+        catch (IllegalArgumentException e) {
+            assertEquals("Nome da tarefa não pode ser vazio!", e.getMessage());
+        }
     }
 
     @Test
@@ -28,32 +42,48 @@ public class AVLtests extends FunctionalTests {
         // Act:
         driver.criarTarefa(nome, descr, data, prioridade);
         // Assert:
+        Tarefa tarefa = driver.getTarefa(nome);
+        assertEquals(nome, tarefa.getNome());
+        assertEquals(descr, tarefa.getDescricao());
+        assertEquals(data, tarefa.getData());
+        assertEquals(prioridade, tarefa.getPrioridade());
     }
 
     @Test
     void nomeTamanhoMaximoTest() {
         /* AAA pattern */
         // Arrenge:
-        nome = "Estudar VeV CCCCCCCCCCCCCC";
+        nome = "Estudar VeV CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC";
         descr = "Escrever testes funcionais";
         data = "20/03/2024";
         prioridade = "alta";
         // Act:
         driver.criarTarefa(nome, descr, data, prioridade);
         // Assert:
+        Tarefa tarefa = driver.getTarefa(nome);
+        assertEquals(nome, tarefa.getNome());
+        assertEquals(descr, tarefa.getDescricao());
+        assertEquals(data, tarefa.getData());
+        assertEquals(prioridade, tarefa.getPrioridade());
     }
 
     @Test
     void nomeTamanhoMaximoMaisUmTest() {
         /* AAA pattern */
         // Arrenge:
-        nome = "Estudar VeV CCCCCCCCCCCCCCC";
+        nome = "Estudar VeV CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC";
         descr = "Escrever testes funcionais";
         data = "20/03/2024";
         prioridade = "alta";
         // Act:
-        driver.criarTarefa(nome, descr, data, prioridade);
+        try {
+            driver.criarTarefa(nome, descr, data, prioridade);
+            fail("A exceção esperada não foi lançada");
+        }
         // Assert:
+        catch (IllegalArgumentException e) {
+            assertEquals("Nome da tarefa não pode ultrapassar 50 caracteres! ", e.getMessage());
+        }
     }
 
     @Test
@@ -65,8 +95,14 @@ public class AVLtests extends FunctionalTests {
         data = "20/03/2024";
         prioridade = "alta";
         // Act:
-        driver.criarTarefa(nome, descr, data, prioridade);
+        try {
+            driver.criarTarefa(nome, descr, data, prioridade);
+            fail("A exceção esperada não foi lançada");
+        }
         // Assert:
+        catch (IllegalArgumentException e) {
+            assertEquals("Descrição da tarefa não pode ser vazio!", e.getMessage());
+        }
     }
 
     @Test
@@ -80,6 +116,11 @@ public class AVLtests extends FunctionalTests {
         // Act:
         driver.criarTarefa(nome, descr, data, prioridade);
         // Assert:
+        Tarefa tarefa = driver.getTarefa(nome);
+        assertEquals(nome, tarefa.getNome());
+        assertEquals(descr, tarefa.getDescricao());
+        assertEquals(data, tarefa.getData());
+        assertEquals(prioridade, tarefa.getPrioridade());
     }
 
     @Test
@@ -87,12 +128,20 @@ public class AVLtests extends FunctionalTests {
         /* AAA pattern */
         // Arrenge:
         nome = "Estudar VeV";
-        descr = "Escrever testes funcionais CCCCCCCCCCCC";
+        descr = "Escrever testes funcionais CCC";
+        for (int i = 0; i < 7; i++) {
+            descr += "CCCCCCCCCC";
+        }
         data = "20/03/2024";
         prioridade = "alta";
         // Act:
         driver.criarTarefa(nome, descr, data, prioridade);
         // Assert:
+        Tarefa tarefa = driver.getTarefa(nome);
+        assertEquals(nome, tarefa.getNome());
+        assertEquals(descr, tarefa.getDescricao());
+        assertEquals(data, tarefa.getData());
+        assertEquals(prioridade, tarefa.getPrioridade());
     }
 
     @Test
@@ -100,12 +149,22 @@ public class AVLtests extends FunctionalTests {
         /* AAA pattern */
         // Arrenge:
         nome = "Estudar VeV";
-        descr = "Escrever testes funcionais CCCCCCCCCCCCC";
+        descr = "Escrever testes funcionais CCC";
+        for (int i = 0; i < 7; i++) {
+            descr += "CCCCCCCCCC";
+        }
+        descr += "C";
         data = "20/03/2024";
         prioridade = "alta";
         // Act:
-        driver.criarTarefa(nome, descr, data, prioridade);
+        try {
+            driver.criarTarefa(nome, descr, data, prioridade);
+            fail("A exceção esperada não foi lançada");
+        }
         // Assert:
+        catch (IllegalArgumentException e) {
+            assertEquals("Descrição da tarefa não pode ultrapassar 100 caracteres! ", e.getMessage());
+        }
     }
 
     @Test
@@ -114,11 +173,18 @@ public class AVLtests extends FunctionalTests {
         // Arrenge:
         nome = "Estudar VeV";
         descr = "Escrever testes funcionais";
-        data = "00/00/0000";
+        LocalDate dataAtual = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String data = dataAtual.format(formatter);
         prioridade = "alta";
         // Act:
         driver.criarTarefa(nome, descr, data, prioridade);
         // Assert:
+        Tarefa tarefa = driver.getTarefa(nome);
+        assertEquals(nome, tarefa.getNome());
+        assertEquals(descr, tarefa.getDescricao());
+        assertEquals(data, tarefa.getData());
+        assertEquals(prioridade, tarefa.getPrioridade());
     }
 
     @Test
@@ -127,11 +193,18 @@ public class AVLtests extends FunctionalTests {
         // Arrenge:
         nome = "Estudar VeV";
         descr = "Escrever testes funcionais";
-        data = "00/00/0000";
+        LocalDate dataAtual = LocalDate.now().plusYears(1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String data = dataAtual.format(formatter);
         prioridade = "alta";
         // Act:
         driver.criarTarefa(nome, descr, data, prioridade);
         // Assert:
+        Tarefa tarefa = driver.getTarefa(nome);
+        assertEquals(nome, tarefa.getNome());
+        assertEquals(descr, tarefa.getDescricao());
+        assertEquals(data, tarefa.getData());
+        assertEquals(prioridade, tarefa.getPrioridade());
     }
 
     @Test
@@ -140,11 +213,17 @@ public class AVLtests extends FunctionalTests {
         // Arrenge:
         nome = "Estudar VeV";
         descr = "Escrever testes funcionais";
-        data = "00/00/0000";
+        data = "Exemplo inválido";
         prioridade = "alta";
         // Act:
-        driver.criarTarefa(nome, descr, data, prioridade);
+        try {
+            driver.criarTarefa(nome, descr, data, prioridade);
+            fail("A exceção esperada não foi lançada");
+        }
         // Assert:
+        catch (IllegalArgumentException e) {
+            assertEquals("Data de vencimento da tarefa não possui formato válido!", e.getMessage());
+        }
     }
 
     @Test
@@ -156,12 +235,19 @@ public class AVLtests extends FunctionalTests {
         data = "00/00/0000";
         // Act:
         prioridade = "alta";
-        driver.criarTarefa(nome, descr, data, prioridade);
-        prioridade = "media";
-        driver.criarTarefa(nome, descr, data, prioridade);
-        prioridade = "baixa";
-        driver.criarTarefa(nome, descr, data, prioridade);
+        driver.atualizarPrioridadeTarefa(nome, prioridade);
         // Assert:
+        assertEquals(prioridade, driver.getTarefa(nome).getPrioridade());
+        // Act:
+        prioridade = "media";
+        driver.atualizarPrioridadeTarefa(nome, prioridade);
+        // Assert:
+        assertEquals(prioridade, driver.getTarefa(nome).getPrioridade());
+        // Act:
+        prioridade = "baixa";
+        driver.atualizarPrioridadeTarefa(nome, prioridade);
+        // Assert:
+        assertEquals(prioridade, driver.getTarefa(nome).getPrioridade());
     }
     
 }
