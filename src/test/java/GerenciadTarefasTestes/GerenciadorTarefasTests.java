@@ -67,6 +67,7 @@ public class GerenciadorTarefasTests {
         assertEquals(prioridadeAlterada, tarefa.getPrioridade());
     }
 
+    @Test
     void excluirTarefaTest() {
         /* AAA pattern */
         // Arrenge:

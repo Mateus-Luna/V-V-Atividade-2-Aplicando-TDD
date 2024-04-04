@@ -37,7 +37,7 @@ public class TarefaService {
     }
 
     public void atualizarPrioridadeTarefa(String nome, String prioridadeAlterada) {
-        tarefaRepository.atualizarPrioridadeTrefa(nome, prioridadeAlterada);
+        tarefaRepository.atualizarPrioridadeTarefa(nome, prioridadeAlterada);
     }
 
     public void excluirTarefa(String nome) {

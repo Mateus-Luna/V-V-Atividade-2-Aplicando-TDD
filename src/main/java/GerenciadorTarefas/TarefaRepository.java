@@ -68,7 +68,7 @@ public class TarefaRepository {
         }
     }
 
-    public void atualizarPrioridadeTrefa(String nome, String prioridadeAlterada) {
+    public void atualizarPrioridadeTarefa(String nome, String prioridadeAlterada) {
         if (containsTarefa(nome)) {
             Tarefa tarefa = repository.get(nome);
             String descr = tarefa.getDescricao();
