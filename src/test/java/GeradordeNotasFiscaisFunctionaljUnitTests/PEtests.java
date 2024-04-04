@@ -1,4 +1,4 @@
-package GeradordeNotasFiscaisFunctionalTests;
+package GeradordeNotasFiscaisFunctionaljUnitTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
